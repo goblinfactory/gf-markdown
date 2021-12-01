@@ -1,6 +1,6 @@
 # dog names
 
-Here are some cat names. If you prefer, see some [dog](../dogs/names.md) names.
+Here are some dog names. If you prefer, see some [cat](../cats/cat-names.md) names.
 
 - Oliver
 - Leo

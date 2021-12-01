@@ -8,8 +8,19 @@ cicd tool for validating markdown files contains no broken links, so that it can
 
 **Usage standalone**
 
-- tbd
-- screenshot. (tbd)
+Run from the root of your solution using either glob patterns e.g. `markdown testdata/**/*.md` in nix or osx, and when running in windows specify each of the filenames separated with spaces.
+
+> markdown testdata/**/*.md -v
+
+*Running with verbose*
+
+![markdown testdata/**/*.md -v](markdown1.png)
+
+> markdown testdata/**/*.md
+
+*Running without verbose*
+
+![markdown testdata/**/*.md](markdown2.png)
 
 **Adding to makefile**
 

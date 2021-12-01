@@ -10,8 +10,8 @@
             "request": "launch",
             "mode": "auto",
             "program": "${fileDirname}",
-            //"args": ["testdata/README.md", "testdata/READMEWithErrors.md"]
-            "args": ["README.md"]
+            "args": ["testdata/README.md", "testdata/cats/cat-names-err.md"]
+            //"args": ["README.md"]
         }
     ]
 }

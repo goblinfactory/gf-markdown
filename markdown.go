@@ -2,10 +2,10 @@ package main
 
 import (
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
+	"path"
 	"path/filepath"
 	"runtime"
 
@@ -19,13 +19,12 @@ func main() {
 	p := &printer.Printer{}
 	pass := Main(p, os.Args[1:])
 	if !pass {
-		log.Fatalf("broken links:%v", os.Args[1:])
+		log.Fatal("broken links.")
 	}
 }
 
 // Main entry point for Markdown checker console app or integration test.
 func Main(p *printer.Printer, args []string) bool {
-	fmt.Printf("%v\n", args)
 	verbose := mystrings.IsAny(os.Args, "-v")
 	args = mystrings.Remove(args, "-v")
 	defer p.Flush()
@@ -86,9 +85,16 @@ type Report struct {
 }
 
 // CheckOne checks that all the links in a markdown file are correct. verbose will include non broken links in report.
-func CheckOne(path string, verbose bool) Report {
+func CheckOne(fpath string, verbose bool) Report {
 
-	bytes, err := ioutil.ReadFile(path)
+	dir := path.Dir(fpath)
+	name := filepath.Base(fpath)
+	cd, err := os.Getwd()
+	check(err)
+	defer os.Chdir(cd)
+	os.Chdir(dir)
+
+	bytes, err := ioutil.ReadFile(name)
 	errcnt := 0
 	check(err)
 	links := FindLinks(bytes)
@@ -108,7 +114,7 @@ func CheckOne(path string, verbose bool) Report {
 	}
 
 	return Report{
-		path,
+		fpath,
 		errcnt == 0,
 		results,
 		errcnt,
@@ -134,20 +140,17 @@ func printReports(p *printer.Printer, reports []Report, verbose bool) {
 
 func printReport(p *printer.Printer, maxWidth int, report Report, verbose bool) {
 
-	if verbose {
-		p.Println("%s%s", mystrings.PadLeft(maxWidth+4, "link"), "ok")
-		p.Println("%s%s", mystrings.PadLeft(maxWidth+4, "----"), "--")
-	}
-
 	if !report.Pass {
 		p.Println("CheckLinks:%s has %s(%d) broken links%s", report.Filename, ansi.Red, report.CntErrors, ansi.Reset)
 	}
-
+	if report.Pass && verbose {
+		p.Println("CheckLinks:%s has %sno broken links%s", report.Filename, ansi.Green, ansi.Reset)
+	}
 	for _, link := range report.MarkdownFiles {
 		if link.Exists {
 			p.Println("%s%s%s  ✓%s", ansi.Reset, mystrings.PadLeft(maxWidth+2, link.RelPath), ansi.Green, ansi.Reset)
 		} else {
-			p.Println(" - %s%s(broken)%s", mystrings.PadLeft(maxWidth, link.RelPath), ansi.Red, ansi.Reset)
+			p.Println("%s%s✗%s", ansi.Red, mystrings.PadLeft(maxWidth+4, link.RelPath), ansi.Reset)
 		}
 	}
 }
@@ -200,7 +203,10 @@ func FindLinks(content []byte) []Link {
 }
 
 func checkGoSourceFileExists(relpath string) (bool, error) {
-	_, err := os.Stat(relpath)
+	cd, _ := os.Getwd()
+	newpath := filepath.Join(cd, relpath)
+	_, err := os.Stat(newpath)
+
 	if err == nil {
 		return true, nil
 	}
