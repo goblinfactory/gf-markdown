@@ -17,8 +17,8 @@ cicd tool for validating markdown files contains no broken links, so that it can
 
 internal packages
 
-- [ansi/ansi.go](cmd/internal/ansi.go) : *Ansi color printing*
-- [mystrings/strings.go](cmd/internal/strings.go) : *misc string utils*
-- [regexs/pairmatcher.go](cmd/internal/regexs/pairmatcher.go) : *regex 'pair' matching*
+- [ansi/ansi.go](internal/ansi/ansi.go) : *Ansi color printing*
+- [mystrings/strings.go](internal/mystrings/strings.go) : *misc string utils*
+- [regexs/pairmatcher.go](internal/regexs/pairmatcher.go) : *regex 'pair' matching*
 
 
