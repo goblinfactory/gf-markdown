@@ -1,4 +1,4 @@
 # mardown test data readme
 
-some test data : [cat names](testdata/cats/cat-names.md) and [dog names](testdata/dogs/dog-names.md).
+some test data : [cat names](cats/cat-names.md) and [dog names](dogs/dog-names.md).
 

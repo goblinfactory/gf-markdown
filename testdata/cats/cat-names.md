@@ -7,4 +7,4 @@ Here are some cat names. If you prefer, see some [dog](../dogs/dog-names.md) nam
 - Mabel
 - Lulu
 
-[parent](../README.md) | [self](cat-names.md)
+[parent](../readme.md) | [self](cat-names.md) | [with errors](cat-names-err.md)
