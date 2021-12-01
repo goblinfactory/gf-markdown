@@ -1,4 +1,4 @@
-# dog names
+# dog names (with errors)
 
 Here are some cat names. If you prefer, see some [dog](../dogs/names.md) names.
 
