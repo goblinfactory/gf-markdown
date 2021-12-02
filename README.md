@@ -4,7 +4,9 @@ cicd tool for validating markdown files contains no broken links, so that it can
 
 **Installing**
 
-- tbd
+```
+go install github.com/goblinfactory/markdown
+```
 
 **Usage**
 
