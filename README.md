@@ -27,7 +27,7 @@ markdown testdata/**/*.md -v
 After installing the tool, simply add the line `markdown **/*.md` to your makefile. This will exit with (-1) fatal, and stop any build if added to a makefile and there are errors.
 
 
-```ruby
+```yaml
 .DEFAULT_GOAL := build
 
 fmt:
