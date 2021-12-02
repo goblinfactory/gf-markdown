@@ -6,25 +6,23 @@ cicd tool for validating markdown files contains no broken links, so that it can
 
 - tbd
 
-**Usage standalone**
+**Usage**
 
 Run from the root of your solution using either glob patterns e.g. `markdown testdata/**/*.md` in nix or osx, and when running in windows specify each of the filenames separated with spaces.
 
-> markdown testdata/**/*.md -v
-
-*Running with verbose*
-
-![markdown testdata/**/*.md -v](markdown1.png)
-
-> markdown testdata/**/*.md
-
-*Running without verbose*
-
+```css
+markdown testdata/**/*.md
+```
 ![markdown testdata/**/*.md](markdown2.png)
+
+```css
+markdown testdata/**/*.md -v
+```
+![markdown testdata/**/*.md -v](markdown1.png)
 
 **Adding to makefile**
 
-- tbd
+Will exit with (-1) fatal, and stop any build if added to a makefile and there are errors.
 
 internal packages
 
@@ -32,4 +30,6 @@ internal packages
 - [mystrings/strings.go](internal/mystrings/strings.go) : *misc string utils*
 - [regexs/pairmatcher.go](internal/regexs/pairmatcher.go) : *regex 'pair' matching*
 
+## todo
 
+- add `-ignore {glob}` to allow you to ignore a folder. e.g. in this case, folders with testdata. Make it easier to use wildcard glob from root, eg. `/**/*.md`
