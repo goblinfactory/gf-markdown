@@ -2,7 +2,7 @@
 
 cicd tool for validating markdown files contains no broken links, so that it can be added as a check as part of the build. If you rename a file and don't remember to update your readme, then `markdown` will stop the build until all the links are correct.
 
-**Installing**
+**Installing tool**
 
 ```
 go install github.com/goblinfactory/markdown
@@ -24,7 +24,31 @@ markdown testdata/**/*.md -v
 
 **Adding to makefile**
 
-Will exit with (-1) fatal, and stop any build if added to a makefile and there are errors.
+After installing the tool, simply add the line `markdown **/*.md` to your makefile. This will exit with (-1) fatal, and stop any build if added to a makefile and there are errors.
+
+
+```ruby
+.DEFAULT_GOAL := build
+
+fmt:
+		go fmt ./...
+.PHONY:fmt
+
+lint: fmt
+		golint ./...
+.PHONY:lint
+
+vet: fmt lint
+		go vet ./...
+.PHONY:vet
+
+build: vet
+		go test -tags integration ./...
+		markdown **/*.md
+		go build ./markdown.go
+.PHONY:build
+
+```
 
 internal packages
 
