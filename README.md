@@ -13,7 +13,7 @@ go install github.com/goblinfactory/gf-markdown
 ```css
 gf-markdown testdata/**/*.md
 ```
-*Run from the root of your solution using glob patterns e.g. `markdown testdata/**/*.md`* 
+*Run from the root of your solution using glob patterns e.g. `gf-markdown testdata/**/*.md`* 
 
 ![markdown testdata/**/*.md](markdown2.png)
 
