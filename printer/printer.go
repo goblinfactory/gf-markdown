@@ -2,14 +2,30 @@ package printer
 
 import (
 	"fmt"
+	"io"
 	"sync"
 )
 
 // Printer that prints to []string, makes writing and testing console apps easier.
 type Printer struct {
 	mu      sync.Mutex
+	w       io.Writer
 	lines   []string
 	history []string
+}
+
+// New creates a new buffered writer
+func New(w io.Writer) *Printer {
+	p := &Printer{}
+	p.w = w
+	return p
+}
+
+// NewTestWriter returns a test writer that does not flush to the console.
+func NewTestWriter() *Printer {
+	p := &Printer{}
+	p.w = nil
+	return p
 }
 
 // Println prints and appends a line to the printer.
@@ -29,13 +45,15 @@ func (p *Printer) GetLines() []string {
 	return lines
 }
 
-// Flush buffered output to console
+// Flush buffered output to writer
 func (p *Printer) Flush() {
 	p.mu.Lock()
 	defer p.mu.Unlock()
 	p.history = append(p.history, p.lines...)
-	for _, l := range p.lines {
-		fmt.Println(l)
+	if p.w != nil {
+		for _, l := range p.lines {
+			fmt.Fprint(p.w, l)
+		}
 	}
 	p.lines = make([]string, 0)
 }

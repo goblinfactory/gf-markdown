@@ -13,15 +13,21 @@ go install github.com/goblinfactory/markdown
 ```css
 markdown testdata/**/*.md
 ```
-*Run from the root of your solution using either glob patterns e.g. `markdown testdata/**/*.md` in nix or osx, and when running in windows specify each of the filenames separated with spaces.*
+*Run from the root of your solution using glob patterns e.g. `markdown testdata/**/*.md`* 
 
 ![markdown testdata/**/*.md](markdown2.png)
 
+## Ignoring folders
+
 ```css
-markdown testdata/**/*.md -v
+markdown **/*.md -ignore testdata/**/*.md
 ```
-*Add -v for verbose output. (will display status of all links)*
+
+## Verbose output
+
+*Add -v for verbose output. (will display status of all links, valid as well as broken)*
 ![markdown testdata/**/*.md -v](markdown1.png)
+
 
 ## Adding to makefile
 
@@ -45,18 +51,72 @@ vet: fmt lint
 
 build: vet
 		go test -tags integration ./...
-		markdown **/*.md
+		markdown **/*.md -ignore testdata/**/*
 		go build ./markdown.go
 .PHONY:build
 
 ```
 
-## Internal packages
+## Calling from your own code
 
-- [ansi/ansi.go](internal/ansi/ansi.go) : *Ansi color printing*
-- [mystrings/strings.go](internal/mystrings/strings.go) : *misc string utils*
-- [regexs/pairmatcher.go](internal/regexs/pairmatcher.go) : *regex 'pair' matching*
+```go
 
-## todo
+	func MyFunc() {
+		
+	}
 
-- add `-ignore {glob}` to allow you to ignore a folder. e.g. in this case, folders with testdata. Make it easier to use wildcard glob from root, eg. `/**/*.md`
+```
+
+## Printer package
+
+- [printer](printer/printer.go) : *Buffered printer to support integration testing*
+
+**How printer works**
+
+Please note: If code exits via log.Fatal(), then defer does not run, and printer will not flush. 
+
+```go
+
+	func TestDoSomething(t *testing.T) {
+
+		// create a buffered printer, and defer all printing
+		p:= &printer.Printer{}
+		defer p.Flush()
+
+		// pass printer to anything that would typically print to the console
+		// when you're done, call flush to print to the console.
+		// flush will print all buffered lines to console, and add printed 
+		// lines to history.
+
+		addNums(p, 1, 3)
+		addNums(p, 2, 3)
+		
+		assert.Equal(t, p.Lines(), []string { 
+			"1 + 2 = 3" 
+			"2 + 3 = 5" 
+		})
+		p.Flush()
+		Greet(p, "Greg")
+		assert.Equal(t, p.Lines(), []string { 
+			"Hello Greg"
+		})
+		p.Flush()
+		
+		// history contains everything printed
+		assert.Equal(t, p.History(), []string { 
+			"1 + 2 = 3" 
+			"2 + 3 = 5" 
+			"Hello Greg"
+		})
+	}
+
+	func addNums(p *printer.Printer, a int, b int) {
+			p.Println("%d + %d = %d", a, b, a+b)
+	}
+
+	func Greet(p *printer.Printer, name string) {
+		p.Println("Hello %s", name)
+	}
+
+```
+	

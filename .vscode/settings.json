@@ -1,0 +1,9 @@
+{
+    "go.vetOnSave": "package",
+    "go.testEnvVars": {
+        "integration": "yes"
+    },
+    "gopls": {
+       "build.buildFlags": [ "-tags=integration"]
+    },
+}
