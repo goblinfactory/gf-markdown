@@ -1,4 +1,4 @@
-module github.com/goblinfactory/markdown
+module github.com/goblinfactory/go-markdown
 
 go 1.17
 

@@ -1,15 +1,11 @@
-# project is moving to github.com/goblinfactory/go-markdown
-
-temporary commit before moving project
-
-# markdown link checker
+# go-markdown link checker
 
 cicd tool for validating markdown files contains no broken links, so that it can be added as a check as part of the build. If you rename a file and don't remember to update your readme, then `markdown` will stop the build until all the links are correct.
 
 ## Installing
 
 ```
-go install github.com/goblinfactory/markdown
+go install github.com/goblinfactory/go-markdown
 ```
 
 ## Usage
