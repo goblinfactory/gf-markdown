@@ -16,5 +16,6 @@ build: vet
 		go test ./...
 		# go test -tags integration
 		markdown readme.md
-		go build ./markdown.go
+		go build 
+		
 .PHONY:build
