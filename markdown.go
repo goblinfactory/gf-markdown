@@ -9,10 +9,10 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/goblinfactory/go-markdown/internal/ansi"
-	"github.com/goblinfactory/go-markdown/internal/mystrings"
-	"github.com/goblinfactory/go-markdown/internal/regexs"
-	"github.com/goblinfactory/go-markdown/printer"
+	"github.com/goblinfactory/gf-markdown/internal/ansi"
+	"github.com/goblinfactory/gf-markdown/internal/mystrings"
+	"github.com/goblinfactory/gf-markdown/internal/regexs"
+	"github.com/goblinfactory/gf-markdown/printer"
 )
 
 // Exit error codes

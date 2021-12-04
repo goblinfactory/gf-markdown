@@ -1,17 +1,17 @@
-# go-markdown link checker
+# gf-markdown link checker
 
 cicd tool for validating markdown files contains no broken links, so that it can be added as a check as part of the build. If you rename a file and don't remember to update your readme, then `markdown` will stop the build until all the links are correct.
 
 ## Installing
 
 ```
-go install github.com/goblinfactory/go-markdown
+go install github.com/goblinfactory/gf-markdown
 ```
 
 ## Usage
 
 ```css
-markdown testdata/**/*.md
+gf-markdown testdata/**/*.md
 ```
 *Run from the root of your solution using glob patterns e.g. `markdown testdata/**/*.md`* 
 
@@ -20,18 +20,18 @@ markdown testdata/**/*.md
 ## Ignoring folders
 
 ```css
-markdown **/*.md -ignore testdata/**/*.md
+gf-markdown **/*.md -ignore testdata/**/*.md
 ```
 
 ## Verbose output
 
 *Add -v for verbose output. (will display status of all links, valid as well as broken)*
-![markdown testdata/**/*.md -v](markdown1.png)
+![gf-markdown testdata/**/*.md -v](markdown1.png)
 
 
 ## Adding to makefile
 
-After installing the tool, simply add the line `markdown **/*.md` to your makefile. This will exit with (-1) fatal, and stop any build if added to a makefile and there are errors.
+After installing the tool, simply add the line `gf-markdown **/*.md` to your makefile. This will exit with (-1) fatal, and stop any build if added to a makefile and there are errors.
 
 
 ```yaml
@@ -51,7 +51,7 @@ vet: fmt lint
 
 build: vet
 		go test -tags integration ./...
-		markdown **/*.md -ignore testdata/**/*
+		gf-markdown **/*.md -ignore testdata/**/*
 		go build ./markdown.go
 .PHONY:build
 

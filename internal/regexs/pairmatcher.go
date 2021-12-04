@@ -3,7 +3,7 @@ package regexs
 import (
 	"regexp"
 
-	"github.com/goblinfactory/go-markdown/internal/mystrings"
+	"github.com/goblinfactory/gf-markdown/internal/mystrings"
 )
 
 // PatternMarkdownURI is a regex pattern that will return markdown uri's matching syntax [word](url)

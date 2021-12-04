@@ -3,7 +3,7 @@ package regexs_test
 import (
 	"testing"
 
-	"github.com/goblinfactory/go-markdown/internal/regexs"
+	"github.com/goblinfactory/gf-markdown/internal/regexs"
 	"github.com/google/go-cmp/cmp"
 )
 
