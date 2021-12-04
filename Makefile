@@ -15,6 +15,6 @@ vet: fmt lint
 build: vet
 		go test ./...
 		# go test -tags integration
-		./markdown readme.md
+		markdown readme.md
 		go build ./markdown.go
 .PHONY:build
