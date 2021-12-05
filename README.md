@@ -20,7 +20,7 @@ gf-markdown testdata/**/*.md
 ## Ignoring folders
 
 ```css
-gf-markdown **/*.md -ignore testdata/**/*.md
+gf-markdown **/*.md
 ```
 
 ## Verbose output
@@ -51,7 +51,7 @@ vet: fmt lint
 
 build: vet
 		go test -tags integration ./...
-		gf-markdown **/*.md -ignore testdata/**/*
+		gf-markdown **/*.md
 		go build ./markdown.go
 .PHONY:build
 ```
@@ -125,3 +125,6 @@ Please note: If code exits via log.Fatal(), then defer does not run, and printer
 
 ```
 	
+## Backlog, Ideas 
+
+- Add a `-i ignore` to allow you to ignore folders.
