@@ -54,18 +54,23 @@ build: vet
 		gf-markdown **/*.md -ignore testdata/**/*
 		go build ./markdown.go
 .PHONY:build
+```
+## Does not support multiple glob patterns
 
+Does not support multiple glob patterns, to support something like `gf-markdown **/*.txt **/*.json` simply call markdown multiple times in your makefile, one for each glob pattern e.g.
+
+```yaml
+build: 
+		...
+		gf-markdown **/*.txt
+		gf-markdown **/*.json
 ```
 
-## Calling from your own code
+## Calling from your own code (using the markdown API)
 
-```go
+See [markdown_integration_test.go](markdown/markdown_integration_test.go) for example of calling markdown from your code.
 
-	func MyFunc() {
-		
-	}
-
-```
+(Hopefully will be able to link to Google's auto documenter as soon as I setup pipeline to create and sign packages.)
 
 ## Printer package
 

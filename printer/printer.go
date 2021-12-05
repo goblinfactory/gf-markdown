@@ -10,30 +10,42 @@ import (
 type Printer struct {
 	mu      sync.Mutex
 	w       io.Writer
+	e       io.Writer
 	lines   []string
 	history []string
+	errors  []string
 }
 
-// New creates a new buffered writer
-func New(w io.Writer) *Printer {
+// New creates a new buffered writer, typically from os.Stdout and os.Stderr
+func New(w io.Writer, e io.Writer) *Printer {
 	p := &Printer{}
 	p.w = w
+	p.e = e
 	return p
 }
 
-// NewTestWriter returns a test writer that does not flush to the console.
+// NewTestWriter returns a test writer that does not flush to the console
 func NewTestWriter() *Printer {
 	p := &Printer{}
 	p.w = nil
+	p.e = nil
 	return p
 }
 
-// Println prints and appends a line to the printer.
+// Println prints and appends a line to the internal stdout printer buffer
 func (p *Printer) Println(format string, a ...interface{}) {
 	p.mu.Lock()
 	defer p.mu.Unlock()
-	line := fmt.Sprintf(format, a...)
+	line := fmt.Sprintf(format+"\n", a...)
 	p.lines = append(p.lines, line)
+}
+
+// PrintErrln prints and appends a line to the internal std err buffer
+func (p *Printer) PrintErrln(format string, a ...interface{}) {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	line := fmt.Sprintf(format+"\n", a...)
+	p.errors = append(p.errors, line)
 }
 
 // GetLines returns all the lines printed.
@@ -42,18 +54,26 @@ func (p *Printer) GetLines() []string {
 	defer p.mu.Unlock()
 	lines := make([]string, len(p.lines))
 	copy(lines, p.lines)
+	copy(lines, p.errors)
 	return lines
 }
 
-// Flush buffered output to writer
+// Flush buffered output to stdout and stderr writers
 func (p *Printer) Flush() {
 	p.mu.Lock()
 	defer p.mu.Unlock()
 	p.history = append(p.history, p.lines...)
+	p.history = append(p.history, p.errors...)
 	if p.w != nil {
 		for _, l := range p.lines {
 			fmt.Fprint(p.w, l)
 		}
 	}
+	if p.e != nil {
+		for _, l := range p.errors {
+			fmt.Fprint(p.e, l)
+		}
+	}
 	p.lines = make([]string, 0)
+	p.errors = make([]string, 0)
 }

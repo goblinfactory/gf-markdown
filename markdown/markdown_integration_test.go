@@ -1,4 +1,4 @@
-package main
+package markdown
 
 import (
 	"testing"
@@ -13,4 +13,8 @@ func TestPassingNoArgsShouldExitWith1(t *testing.T) {
 	// retCode := run(args, p)
 
 	// assert.Equal()
+}
+
+func TestIgnoringFiles(t *testing.T) {
+
 }
