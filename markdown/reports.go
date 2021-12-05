@@ -10,7 +10,6 @@ import (
 	"github.com/goblinfactory/gf-markdown/markdown/internal/ansi"
 	"github.com/goblinfactory/gf-markdown/markdown/internal/mystrings"
 	"github.com/goblinfactory/gf-markdown/markdown/internal/regexs"
-	"github.com/goblinfactory/gf-markdown/printer"
 )
 
 // Result of running the markdown checks
@@ -37,8 +36,8 @@ type Link struct {
 	RelPath string
 }
 
-// GetReports main entry point for Markdown checker console app or integration test.
-func GetReports(p *params) ([]Report, Result) {
+// getReports main entry point for Markdown checker console app or integration test.
+func getReports(p *params) ([]Report, Result) {
 	reports := make([]Report, 0)
 	for _, f := range p.files {
 		r := GetReport(f)
@@ -130,14 +129,14 @@ func GetReport(filename string) Report {
 	return r
 }
 
-func printReports(p *printer.Printer, reports []Report, verbose bool) {
+func printReports(p *Printer, reports []Report, verbose bool) {
 	mw := maxWidth(reports)
 	for _, r := range reports {
 		printReport(p, mw, r, verbose)
 	}
 }
 
-func printReport(p *printer.Printer, maxWidth int, report Report, verbose bool) {
+func printReport(p *Printer, maxWidth int, report Report, verbose bool) {
 
 	if !report.Pass {
 		p.Println("CheckLinks:%s has %s(%d) broken links%s", report.File, ansi.Red, report.CntErrors, ansi.Reset)

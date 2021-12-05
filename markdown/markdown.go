@@ -6,11 +6,10 @@ import (
 	"runtime"
 
 	"github.com/goblinfactory/gf-markdown/markdown/internal/mystrings"
-	"github.com/goblinfactory/gf-markdown/printer"
 )
 
 type params struct {
-	printer *printer.Printer
+	printer *Printer
 	userParams
 }
 
@@ -20,21 +19,21 @@ type userParams struct {
 }
 
 // RunFromArgs runs gf-markdown app and returns it's exit status.
-func RunFromArgs(args []string, printer *printer.Printer) Result {
+func RunFromArgs(args []string, printer *Printer) Result {
 	prms, err := parseParams(args)
 	if err != nil {
 		printer.PrintErrln(err.Error())
 		printer.Flush()
 		return Err2Arguments
 	}
-	retcode := Run(&params{printer, prms})
+	retcode := run(&params{printer, prms})
 	return retcode
 }
 
-// Run gf-markdown app, print any reports to the buffered printer, flushes to writers, and returns it's exit status
-func Run(p *params) Result {
+// run gf-markdown app, print any reports to the buffered printer, flushes to writers, and returns it's exit status
+func run(p *params) Result {
 	defer p.printer.Flush()
-	reports, result := GetReports(p)
+	reports, result := getReports(p)
 	if result == Success && !p.verbose {
 		return Success
 	}
@@ -65,6 +64,6 @@ func parseParams(args []string) (userParams, error) {
 	return userParams{v, files}, nil
 }
 
-func usage(p *printer.Printer) {
+func usage(p *Printer) {
 	p.Println("usage: markdown [-v] [/a/b/filename1.txt] [readme.md] [...]")
 }

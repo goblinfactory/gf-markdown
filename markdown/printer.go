@@ -1,4 +1,4 @@
-package printer
+package markdown
 
 import (
 	"fmt"
@@ -16,8 +16,8 @@ type Printer struct {
 	errors  []string
 }
 
-// New creates a new buffered writer, typically from os.Stdout and os.Stderr
-func New(w io.Writer, e io.Writer) *Printer {
+// NewPrinter creates a new buffered writer, typically from os.Stdout and os.Stderr
+func NewPrinter(w io.Writer, e io.Writer) *Printer {
 	p := &Printer{}
 	p.w = w
 	p.e = e

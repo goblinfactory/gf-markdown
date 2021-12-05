@@ -72,9 +72,15 @@ See [markdown_integration_test.go](markdown/markdown_integration_test.go) for ex
 
 (Hopefully will be able to link to Google's auto documenter as soon as I setup pipeline to create and sign packages.)
 
+| method | params |
+| --- | --- |
+| [RunFromArgs](markdown/markdown.go)  | `(args []string, printer *Printer) Result` |
+| [GetReport](markdown/reports.go)  | `(filename string) Report` |
+
+
 ## Printer package
 
-- [printer](printer/printer.go) : *Buffered printer to support integration testing*
+- [Printer](markdown/printer.go) : *Buffered printer to support integration testing*
 
 **How printer works**
 
@@ -85,7 +91,7 @@ Please note: If code exits via log.Fatal(), then defer does not run, and printer
 	func TestDoSomething(t *testing.T) {
 
 		// create a buffered printer, and defer all printing
-		p:= &printer.Printer{}
+		p:= &Printer{}
 		defer p.Flush()
 
 		// pass printer to anything that would typically print to the console
@@ -115,11 +121,11 @@ Please note: If code exits via log.Fatal(), then defer does not run, and printer
 		})
 	}
 
-	func addNums(p *printer.Printer, a int, b int) {
+	func addNums(p *Printer, a int, b int) {
 			p.Println("%d + %d = %d", a, b, a+b)
 	}
 
-	func Greet(p *printer.Printer, name string) {
+	func Greet(p *Printer, name string) {
 		p.Println("Hello %s", name)
 	}
 
