@@ -68,7 +68,7 @@ build:
 
 ## Calling from your own code (using the markdown API)
 
-See [markdown_integration_test.go](markdown/markdown_integration_test.go) for example of calling markdown from your code.
+See [markdown_integration_test.go](markdown/markdown_integration_test.go) for example of calling markdown from your code. <-- still to-do : busy with integration tests now, just finished all the changes to make it unit testable.
 
 (Hopefully will be able to link to Google's auto documenter as soon as I setup pipeline to create and sign packages.)
 
