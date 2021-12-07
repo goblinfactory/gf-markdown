@@ -2,19 +2,33 @@ package markdown
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
-func TestPassingNoArgsShouldExitWith1(t *testing.T) {
-	// tests.RunIfEnvVarSet(t, "integration")
+// Expected results
+// ----------------
+// Success
+// Err1Unhandled
+// Err2Arguments
+// Err3Links
 
-	// args := []string{"markdown_integration_test.go"}
+func TestPassingNoArgsShouldExitWithErr2(t *testing.T) {
 
-	// p := printer.NewTestWriter()
-	// retCode := run(args, p)
-
-	// assert.Equal()
+	args := []string{}
+	p := NewTestWriter()
+	retCode := RunFromArgs(args, p)
+	assert.Equal(t, Err2Arguments, retCode)
 }
 
 func TestIgnoringFiles(t *testing.T) {
 
 }
+
+// func TestIgnoreFolders(t *testing.T) {
+// 	panic("can you see me")
+// 	// p := &Printer{}
+// 	// args := []string{"testdata/**/*.md", ""}
+// 	// pass := Main(p, args)
+
+// }

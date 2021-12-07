@@ -12,17 +12,6 @@ import (
 	"github.com/goblinfactory/gf-markdown/markdown/internal/regexs"
 )
 
-// Result of running the markdown checks
-type Result int
-
-// Exit error codes
-const (
-	Success       = 0
-	Err1Unhandled = 1
-	Err2Arguments = 2
-	Err3Links     = 3
-)
-
 // LinkCheck of checking a Link
 type LinkCheck struct {
 	Link

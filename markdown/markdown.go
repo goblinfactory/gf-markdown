@@ -18,6 +18,17 @@ type userParams struct {
 	files   []string
 }
 
+// Result of running the markdown checks
+type Result int
+
+// Exit error codes
+const (
+	Success       = Result(0)
+	Err1Unhandled = Result(1)
+	Err2Arguments = Result(2)
+	Err3Links     = Result(3)
+)
+
 // RunFromArgs runs gf-markdown app and returns it's exit status.
 func RunFromArgs(args []string, printer *Printer) Result {
 	prms, err := parseParams(args)
