@@ -32,7 +32,7 @@ func getReports(p *params) ([]Report, Result) {
 		r := GetReport(f)
 		reports = append(reports, r)
 	}
-	if AllPassed(reports) {
+	if allPassed(reports) {
 		return reports, Success
 	}
 	return reports, Err3Links
@@ -118,14 +118,16 @@ func GetReport(filename string) Report {
 	return r
 }
 
-func printReports(p *Printer, reports []Report, verbose bool) {
+// PrintReports prints all the broken link reports. If not verbose and no broken links, prints nothing.
+func PrintReports(p *Printer, reports []Report, verbose bool) {
 	mw := maxWidth(reports)
 	for _, r := range reports {
-		printReport(p, mw, r, verbose)
+		PrintReport(p, mw, r, verbose)
 	}
 }
 
-func printReport(p *Printer, maxWidth int, report Report, verbose bool) {
+// PrintReport prints a broken link report. If not verbose and no broken links, prints nothing.
+func PrintReport(p *Printer, maxWidth int, report Report, verbose bool) {
 
 	if !report.Pass {
 		p.Println("CheckLinks:%s has %s(%d) broken links%s", report.File, ansi.Red, report.CntErrors, ansi.Reset)
@@ -165,7 +167,7 @@ func parseLinks(pairs regexs.Pairs) []Link {
 	return m
 }
 
-// FindLinks finds all the internal hyperlinks in a markdown file (in this case a sequence of bytes)
+// FindLinks finds all the hyperlinks in any sequence of bytes
 // using markdown [text](hyperlink) format. Ignores any external links
 func FindLinks(content []byte) []Link {
 	pm := regexs.NewPairMatcher(regexs.PatternMarkdownURI, nil, []string{"://"})
@@ -188,8 +190,8 @@ func checkDestFileExists(relpath string) (bool, error) {
 	return false, err
 }
 
-// AllPassed returns false if any of the markdown files have broken links
-func AllPassed(reports []Report) bool {
+// allPassed returns false if any of the markdown files have broken links
+func allPassed(reports []Report) bool {
 	allValid := true
 	for _, r := range reports {
 		if !r.Pass {

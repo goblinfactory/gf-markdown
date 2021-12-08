@@ -68,15 +68,24 @@ build:
 
 ## Calling from your own code (using the markdown API)
 
-See [markdown_integration_test.go](markdown/markdown_integration_test.go) for example of calling markdown from your code. <-- still to-do : busy with integration tests now, just finished all the changes to make it unit testable.
+See [markdown_test.go](markdown/markdown_test.go) for example of calling markdown from your code and return DTO's.
 
-(Hopefully will be able to link to Google's auto documenter as soon as I setup pipeline to create and sign packages.)
-
-| method | params |
-| --- | --- |
-| [RunFromArgs](markdown/markdown.go)  | `(args []string, printer *Printer) Result` |
-| [GetReport](markdown/reports.go)  | `(filename string) Report` |
-
+`GetReport("../testdata/cats/cat-names.md")` for a valid markdown file returns
+```go
+Report{
+		"../testdata/cats/cat-names.md",
+		true,
+		[]LinkCheck{
+			{Link{Text: "dog", RelPath: "../dogs/dog-names.md"}, true, "(ok)"},
+			{Link{Text: "parent", RelPath: "../readme.md"}, true, "(ok)"},
+			{Link{Text: "self", RelPath: "cat-names.md"}, true, "(ok)"},
+			{Link{Text: "with errors", RelPath: "cat-names-err.md"}, true, "(ok)"},
+		},
+		0,
+		Success,
+		nil,
+	}
+```
 
 ## Printer package
 
@@ -91,7 +100,7 @@ Please note: If code exits via log.Fatal(), then defer does not run, and printer
 	func TestDoSomething(t *testing.T) {
 
 		// create a buffered printer, and defer all printing
-		p:= &Printer{}
+		p := NewTestWriter()
 		defer p.Flush()
 
 		// pass printer to anything that would typically print to the console
