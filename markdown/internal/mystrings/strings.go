@@ -1,3 +1,4 @@
+// Package mystrings contains miscalaneous string utilities for matching, padding, filtering and querying
 package mystrings
 
 import (

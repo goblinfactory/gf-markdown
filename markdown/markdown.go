@@ -1,3 +1,4 @@
+// Package markdown provides markdown parsing and checking primarily for use as part of the makefile to avoid broken links from accidentally being checked into source code, or ending up being published
 package markdown
 
 import (

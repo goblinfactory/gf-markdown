@@ -1,3 +1,13 @@
+// Package tests enables us to run (or bypass) the integration tests by checking if an environment variable has been set or not.
+// VSCode is currently unable to debug Integration tests using the go convention, named {package}_integration_test.go
+// hence this approach.
+// In order to run the integration tests from within vscode, you need to set appropriate environment variables.
+// add the following to your settings.json
+// ```json
+//   "go.testEnvVars": {
+// 	"integration": "yes"
+// },
+// ```
 package tests
 
 import (
@@ -25,6 +35,3 @@ func RunIfEnvVarSet(t *testing.T, envvar string) {
 	}
 	t.Skip(fmt.Sprintf("set env var [%s] to run this test", envvar))
 }
-
-// notes
-// to debug an integration test from within visual studio code add the following

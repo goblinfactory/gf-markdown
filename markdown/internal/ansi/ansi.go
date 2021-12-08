@@ -1,3 +1,4 @@
+// Package ansi provides console escape sequences for the few colors used by the markdown report printer
 package ansi
 
 // Reset resets the colors back to console default

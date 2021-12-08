@@ -1,3 +1,4 @@
+// Package regexs provides helper methods for finding pairs of text matches within strings using regular expressions
 package regexs
 
 import (
