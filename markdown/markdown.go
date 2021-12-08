@@ -48,7 +48,7 @@ func run(p *params) Result {
 	if result == Success && !p.verbose {
 		return Success
 	}
-	printReports(p.printer, reports, p.verbose)
+	PrintReports(p.printer, reports, p.verbose)
 	return result
 
 }

@@ -1,0 +1,6 @@
+([]string) (len=4) {
+  (string) (len=72) "CheckLinks:testdata/brokenlinks/README.md has \x1b[31m(1) broken links\x1b[0m\n",
+  (string) (len=38) "\x1b[0mcats/cat-names.md  \x1b[32m  ✓\x1b[0m\n",
+  (string) (len=38) "\x1b[0mdogs/dog-names.md  \x1b[32m  ✓\x1b[0m\n",
+  (string) (len=46) "\x1b[31mdogs/doggonitt.md    ✗ Broken link\x1b[0m\n"
+}

@@ -3,7 +3,7 @@
     "go.testEnvVars": {
         "integration": "yes"
     },
-    "gopls": {
-       "build.buildFlags": [ "-tags=integration"]
-    },
+    // "gopls": {
+    //    "build.buildFlags": [ "-tags=integration"]
+    // },
 }

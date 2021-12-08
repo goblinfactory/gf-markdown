@@ -14,6 +14,7 @@
             //"args": ["README.md"]
             "args": [],
 
+            // this will only take effect when debugging with (F5)?
             "env" : {
                 "INTEGRATION": "yup"
             }

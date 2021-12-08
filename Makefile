@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := build
-
+export integration=true
 fmt:
 		go fmt ./...
 .PHONY:fmt
@@ -14,7 +14,7 @@ vet: fmt lint
 
 build: vet
 		go test ./...
-		# go test -tags integration
+		# go test
 		markdown readme.md
 		go build 
 		

@@ -39,20 +39,3 @@ func TestFindLinks(t *testing.T) {
 	actual := FindLinks(src)
 	assert.Equal(t, expected, actual)
 }
-
-
-TestPrintReportWhenNoBrokenLinksAndNotVerbosePrintsNothing() {
-
-}
-
-TestPrintReportWhenNoBrokenLinksAndVerbosePrintsAllLinks() {
-	
-}
-
-TestPrintReportWhenBrokenLinksVerbose() {
-	
-}
-
-TestPrintReportWhenBrokenLinksAndNotVerboseOnlyPrintsTheBrokenLinks() {
-	
-}

@@ -140,6 +140,27 @@ Please note: If code exits via log.Fatal(), then defer does not run, and printer
 
 ```
 	
-## Backlog, Ideas 
+## Debugging the integration tests from within visual studio
 
-- Add a `-i ignore` to allow you to ignore folders.
+Add `go.testEnvVars` to your settings file as shown below. Once that's done, restart vscode and you should be able to debug the integration tests and step through the code. 
+
+```json
+{
+    "go.vetOnSave": "package",
+    "go.testEnvVars": {
+        "integration": "yes"
+    },
+```
+
+To temporarily remove the integration tests from a build while refactoring, remove the `export integration=true` line at the top of the `Makefile`.
+
+## Some random ideas backlog ? 
+
+- `Include line number in the errors`. Will require that findlinks return the linenumber. Will need to use scanner to split byte slices into rows and then run the regex against each row 1 by 1, returning the row number. 
+- Add a `-i ignore` to allow you to specify folders or files to ignore. This would allow you to use a global root glob pattern, with option to ignore a specific file or files as needed.
+
+## Contributing
+
+Feel free to submit a pull request if you want to play with this lib and drop in a fix or tweak or two. Will be most appreciated.
+
+Cheers Alan
