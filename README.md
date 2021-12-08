@@ -17,12 +17,6 @@ gf-markdown testdata/**/*.md
 
 ![markdown testdata/**/*.md](markdown2.png)
 
-## Ignoring folders
-
-```css
-gf-markdown **/*.md
-```
-
 ## Verbose output
 
 *Add -v for verbose output. (will display status of all links, valid as well as broken)*
