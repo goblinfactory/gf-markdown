@@ -2,12 +2,11 @@
 
 cicd tool for validating markdown files contains no broken links, so that it can be added as a check as part of the build. If you rename a file and don't remember to update your readme, then `markdown` will stop the build until all the links are correct.
 
-## Installing
+## Installing the tool
 
 ```
 go install github.com/goblinfactory/gf-markdown
 ```
-
 ## Usage
 
 ```css
@@ -22,14 +21,17 @@ gf-markdown testdata/**/*.md
 *Add -v for verbose output. (will display status of all links, valid as well as broken)*
 ![gf-markdown testdata/**/*.md -v](markdown1.png)
 
-
-## Adding to makefile
+## Adding markdown checking to your own makefile
 
 After installing the tool, simply add the line `gf-markdown **/*.md` to your makefile. This will exit with (-1) fatal, and stop any build if added to a makefile and there are errors.
-
+If you want your makefile to work on a build server, then include the tool step below which installs the tools before the build step runs. (This is safe to run multiple times.)
 
 ```yaml
 .DEFAULT_GOAL := build
+
+tool:
+		go install github.com/goblinfactory/gf-markdown
+.PHONY:tools
 
 fmt:
 		go fmt ./...
@@ -134,7 +136,7 @@ Please note: If code exits via log.Fatal(), then defer does not run, and printer
 
 ```
 	
-## Debugging the integration tests from within visual studio
+## Debugging the integration tests from within VSCode
 
 Add `go.testEnvVars` to your settings file as shown below. Once that's done, restart vscode and you should be able to debug the integration tests and step through the code. 
 
