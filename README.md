@@ -154,10 +154,6 @@ To temporarily remove the integration tests from a build while refactoring, remo
 
 - `Include line number in the errors`. Will require that findlinks return the linenumber. Will need to use scanner to split byte slices into rows and then run the regex against each row 1 by 1, returning the row number. 
 - Add a `-i ignore` to allow you to specify folders or files to ignore. This would allow you to use a global root glob pattern, with option to ignore a specific file or files as needed.
-- Add `-g` flag `-g github.com/myfriendx/hisprojectfoo` To check a project online and produce the same report. 
-
-## Contributing
-
-Feel free to submit a pull request if you want to play with this lib and drop in a fix or tweak or two. Will be most appreciated.
+- Add `-g` flag `-g github.com/myfriendx/hisprojectfoo` To check a project online and produce the same report.
 
 Cheers Alan
