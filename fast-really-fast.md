@@ -2,4 +2,6 @@
 
 Judge for you for yourself...
 
-<a href='holy-spitballs.png'><img width=900 src='holy-spitballs.png'/></a>
+<img width=900 src='holy-spitballs.png'/>
+
+**Right click, open in new tab for full view**
