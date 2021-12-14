@@ -13,6 +13,18 @@ builds:
       - linux
       - windows
       - darwin
+brews:
+  - tap:
+      owner: goblinfactory
+      name: homebrew-tools
+    commit_author:
+      name: Alan Hemmings
+      email: goblinfactory@gmail.com
+    homepage: "https://github.com/goblinfactory/gf-markdown"
+    description: "markdown documentation link validator"
+    license: "MIT"
+    skip_upload: auto
+
 archives:
   - replacements:
       darwin: Darwin
