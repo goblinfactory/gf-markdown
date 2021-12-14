@@ -15,3 +15,6 @@
 # vendor/
 .idea
 gf-markdown
+dist/
+/**/.DS_Store
+.DS_Store
