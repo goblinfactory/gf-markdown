@@ -36,7 +36,7 @@ If you want your makefile to work on a build server, then include the tool step 
 ```yaml
 .DEFAULT_GOAL := build
 
-tool:
+tools:
 		go install github.com/goblinfactory/gf-markdown
 .PHONY:tools
 
